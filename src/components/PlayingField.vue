@@ -4,20 +4,12 @@
       Нашёл, как сделать локальную переменную в шаблоне здесь.
       https://coderoad.ru/53732201/Vue-js-%D0%BB%D0%BE%D0%BA%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%BF%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D1%8B%D0%B5-%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD%D0%B0
     -->
-    <Cell v-for="i in numberOfAllCells"
-          :key="i"
-          :set="coords = getCoordFromNumber(i)"
-          :coord-x="coords.coordX"
-          :coord-y="coords.coordY"
-          @click="cellClickHandler"
+    <Cell v-for="(cell, index) in cellsArray"
+          :key="index"
+          :coord-x="cell.coord.x"
+          :coord-y="cell.coord.y"
+          @click="cellClickHandler($event, index)"
     ></Cell>
-
-<!--    <Cell v-for="cell in cellsArray"-->
-<!--          :key="cell.coord.x"-->
-<!--          :coord-x="cell.coord.x"-->
-<!--          :coord-y="cell.coord.y"-->
-<!--          @click="cellClickHandler"-->
-<!--    ></Cell>-->
   </div>
 </template>
 
@@ -31,26 +23,18 @@ export default {
       return this.area * this.area;
     },
   },
+
   data(){
+    let area = 7;
+
     return {
-      area: 7,
-      cellsArray: new CellsFactory(this.area).make()
+      area,
+      cellsArray: new CellsFactory(area).make()
     } // return.
   }, // data.
   methods:{
-    // Получить координаты из числа.
-    getCoordFromNumber(num) {
-      let actualNum = num - 1;
-
-      let coordY = Math.floor(actualNum / this.area);
-      let coordX = actualNum - coordY * this.area;
-
-      return {coordX: coordX + 1, coordY: coordY + 1};
-    },
-    cellClickHandler(){
-      this.cellsArray = new CellsFactory(this.area).make();
-
-      console.log(this.cellsArray[0].coord.x);
+    cellClickHandler(_event, index){
+      console.log(index);
     }
   },
 
