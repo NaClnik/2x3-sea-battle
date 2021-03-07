@@ -7,6 +7,7 @@
             :coord-y="cell.coord.y"
             :state="cell.state"
             @click="cellClickHandler($event, index)"
+            @ship-drop="onShipDrop"
       ></Cell>
     </div>
     <div>
@@ -14,6 +15,7 @@
           style="margin: 5px"
           v-for="(ship, index) in shipsArray"
           :key="index"
+          :index="index"
           :num-of-decks="ship.numOfDecks"
           :can-toggle="ship.canToggle"
           :position="ship.position"
@@ -49,6 +51,17 @@ export default {
       this.cellsArray[index].state = 'miss';
       console.log(index);
     },
+    onShipDrop(index){
+      console.log(index);
+      // this.shipsArray.splice(index, 1);
+      // console.log(index);
+      // let copyArray = this.shipsArray.slice();
+      // copyArray.splice(index, 1);
+      // this.shipsArray = copyArray;
+      // // copyArray = this.shipsArray.splice(index, 1);
+      //
+      // console.log(copyArray);
+    } // onCustomDrag.
 
   },
 

@@ -27,7 +27,11 @@ export default {
     position: {
       type: String,
       required: true
-    } // position.
+    }, // position.
+    index: {
+      type: Number,
+      required: true
+    } // index.
   }, // props.
   data(){
     return {
@@ -44,6 +48,9 @@ export default {
       event.dataTransfer.dropEffect = 'move'
       event.dataTransfer.effectAllowed = 'move'
       event.dataTransfer.setData('numOfDecks', this.numOfDecks.toString());
+      event.dataTransfer.setData('index', this.index.toString());
+
+      this.$emit('custom-drag', this.index);
     }, // onDragStart.
     onClick(){
       if(!this.canToggle)

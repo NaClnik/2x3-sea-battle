@@ -10,6 +10,7 @@
         :can-toggle="ship.canToggle"
         :num-of-decks="ship.numOfDecks"
         :position="ship.position"
+        :index="ship.index"
     ></Ship>
   </div>
 </template>
@@ -43,12 +44,16 @@ export default {
       let position = 'absolute';
       let canToggle = true;
       let numOfDecks = parseInt(event.dataTransfer.getData('numOfDecks'));
+      let index = parseInt(event.dataTransfer.getData('index'));
 
       this.ship = {
         position,
         canToggle,
-        numOfDecks
+        numOfDecks,
+        index
       } // ship.
+
+      this.$emit('ship-drop', this.ship.index);
     } // onDrop.
   } // methods.
 } // default.
