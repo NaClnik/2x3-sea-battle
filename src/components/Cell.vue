@@ -1,12 +1,24 @@
 <template>
-  <div class="cell">
-    {{state}}
+  <div
+      class="cell"
+      @drop="onDrop"
+      @dragover.prevent
+      @dragenter.prevent
+  >
+    <Ship
+        v-if="ship"
+        :can-toggle="ship.canToggle"
+        :num-of-decks="ship.numOfDecks"
+        :position="ship.position"
+    ></Ship>
   </div>
 </template>
 
 <script>
+import Ship from "@/components/Ship";
 export default {
   name: "Cell",
+  components: {Ship},
   props: {
     coordX: {
       type: Number,
@@ -20,7 +32,25 @@ export default {
       type: String,
       required: true
     } // state.
-  } // props.
+  }, // props.
+  data(){
+    return{
+      ship: null
+    } // return.
+  }, // data.
+  methods: {
+    onDrop(event){
+      let position = 'absolute';
+      let canToggle = true;
+      let numOfDecks = parseInt(event.dataTransfer.getData('numOfDecks'));
+
+      this.ship = {
+        position,
+        canToggle,
+        numOfDecks
+      } // ship.
+    } // onDrop.
+  } // methods.
 } // default.
 </script>
 
