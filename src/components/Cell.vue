@@ -5,6 +5,7 @@
       @dragover.prevent
       @dragenter.prevent
   >
+    <span style="position: absolute">{{state}}</span>
     <Ship
         v-if="ship"
         :can-toggle="ship.canToggle"
