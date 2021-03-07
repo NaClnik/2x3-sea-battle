@@ -1,13 +1,10 @@
 <template>
   <div class="cells-container">
-    <!--
-      Нашёл, как сделать локальную переменную в шаблоне здесь.
-      https://coderoad.ru/53732201/Vue-js-%D0%BB%D0%BE%D0%BA%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%BF%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D1%8B%D0%B5-%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD%D0%B0
-    -->
     <Cell v-for="(cell, index) in cellsArray"
           :key="index"
           :coord-x="cell.coord.x"
           :coord-y="cell.coord.y"
+          :state="cell.state"
           @click="cellClickHandler($event, index)"
     ></Cell>
   </div>
@@ -34,6 +31,7 @@ export default {
   }, // data.
   methods:{
     cellClickHandler(_event, index){
+      this.cellsArray[index].state = 'miss';
       console.log(index);
     }
   },

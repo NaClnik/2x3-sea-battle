@@ -1,5 +1,6 @@
 <template>
   <div class="cell">
+    {{state}}
   </div>
 </template>
 
@@ -15,6 +16,10 @@ export default {
       type: Number,
       required: true
     }, // coordY.
+    state: {
+      type: String,
+      required: true
+    } // state.
   } // props.
 } // default.
 </script>
